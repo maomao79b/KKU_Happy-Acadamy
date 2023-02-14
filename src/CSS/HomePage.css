@@ -1,0 +1,17 @@
+body, html {
+    height: 100%;
+  }
+  
+  .bg {
+    /* The image used */
+    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1623.jpeg");
+  
+    /* Full height */
+    height: 100%;
+    width: 100%;
+    filter: blur(2px);
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

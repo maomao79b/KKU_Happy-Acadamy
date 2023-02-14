@@ -1,8 +1,9 @@
 import React from "react";
+import '../CSS/HomePage.css'
 function HomePage(){
     return(
-        <div>
-            Home
+        <div className="bg">
+            
         </div>
     )
 }

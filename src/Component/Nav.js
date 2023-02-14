@@ -8,14 +8,14 @@ function Navbar() {
     <header className='nav-top container-wrapper'>
       <div className='nav-wrapper container-wrapper'>
         <nav className='navbar container'>
-          <div className='flex v-center '>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
+          <div className='flex v-center'>
+            <Link to="/" className='font_color_w no-line'>Home</Link>
+            <Link to="/about" className='font_color_w no-line' style={{margin:"0.75rem"}}>About</Link>
           </div>
           <div className='navbar__spacer'></div>
           <div>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className='font_color_w no-line'>Login</Link>
+            <Link to="/register" className='font_color_w no-line' style={{margin:"0.75rem"}}>Register</Link>
           </div>
         </nav>
       </div>

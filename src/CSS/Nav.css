@@ -13,7 +13,7 @@ div {
 }
 
 .nav-wrapper{
-    height: 2.125rem;
+    height: 3rem;
     z-index: 400;
     background: transparent;
     position: relative;
@@ -29,9 +29,10 @@ div {
 }
 
 .nav-top {
-    background: #f53d2d;
-    background: linear-gradient(-180deg,#f53d2d,#f63);
+    background: #3f4958;
+    background: linear-gradient(-180deg,#3f4958,rgb(45, 45, 45));
     transition: transform .2s cubic-bezier(.4,0,.2,1);
+    
 }
 
 .center, .v-center {
@@ -51,6 +52,10 @@ div {
     display: flex;
     align-items: center;
 }
+.font_color_w{
+    color: #fff;
+}
+
 .navbar__links {
     list-style: none;
     padding: 0;
@@ -72,6 +77,11 @@ div {
     margin: 0;
     height: 2.125rem;
 }
+
+.no-line {
+    text-decoration: none;
+}
+
 ul {
     display: block;
     list-style-type: disc;

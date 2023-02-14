@@ -69,10 +69,10 @@ function Login() {
 
   return (
     <div className="App">
-      <div className="Login__form">
-        <div className="Login__title">Login</div>
-        {isSubmitted ? <div>Login Success</div> : formForLogin}
-      </div>
+        <div className="Login__form">
+          <div className="Login__title">Login</div>
+          {isSubmitted ? <div>Login Success</div> : formForLogin}
+        </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+
 input[type="text"],
   input[type="password"] {
     height: 25px;
@@ -12,11 +13,14 @@ input[type="text"],
     border: 1px solid #a7afad;
     color: #000000;
     padding: 10px 20px;
+    transition: 0.5s;
   }
   
   input[type="submit"]:hover {
     background: #000000;
     color: #fcfcfc;
+    transition: 1s;
+    border-radius: 90px;
   }
   
   .Button__container {
@@ -28,6 +32,7 @@ input[type="text"],
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
   }
   
   .list-container {
@@ -42,6 +47,7 @@ input[type="text"],
   .Login__title {
     font-size: 25px;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .Login__container {
@@ -49,4 +55,12 @@ input[type="text"],
     flex-direction: column;
     gap: 8px;
     margin: 10px;
+  }
+
+  .BgPic {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://thumbor.forbes.com/thumbor/fit-in/960x600/https://www.forbes.com/wheels/wp-content/uploads/2022/09/2023_Mercedes-Benz_Sclass_Gallery1.jpg");
+    margin-left: 0px;
+    margin-right: 0px;
+    width: auto;
+    object-fit: cover;
   }
