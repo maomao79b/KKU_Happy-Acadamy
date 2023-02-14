@@ -5,7 +5,6 @@ import '../CSS/Register.css';
 function Register() {
     const [errorMessages, setErrorMessages] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [password, setPassword] = useState('')
     const renderErrorMessage = (name) =>
         name === errorMessages.name && (
             <div className="error">{errorMessages.message}</div>
@@ -18,27 +17,21 @@ function Register() {
     const handleSubmit = (event) => {
         // prevent page reload
         event.preventDefault();
-        // var { uname, upass } = document.forms[0]
-        // var a1 = document.getElementByName("upass")
-        // var a2 = document.getElementsByName("uconfpass")
-        // if(a1!=a2){
+        var { uname, upass } = document.forms[0]
 
-        // }
-        // if()
+        const userData = database.find((user) => user.username === uname.value);
 
-        // const userData = database.find((user) => user.username === uname.value);
-
-        // if (userData) {
-        //     if (userData.password !== upass.value) {
-        //         // Invalid password
-        //         setErrorMessages({ name: "upass", message: errors.upass });
-        //     } else {
-        //         setIsSubmitted(true);
-        //     }
-        // } else {
-        //     // Username not found
-        //     setErrorMessages({ name: "uname", message: errors.uname });
-        // }
+        if (userData) {
+            if (userData.password !== upass.value) {
+                // Invalid password
+                setErrorMessages({ name: "upass", message: errors.upass });
+            } else {
+                setIsSubmitted(true);
+            }
+        } else {
+            // Username not found
+            setErrorMessages({ name: "uname", message: errors.uname });
+        }
     };
 
     const formForRegister = (
@@ -48,12 +41,12 @@ function Register() {
                     <div className='Register__container' style={{ flex: 1 }}>
                         <label>Firstname</label>
                         <input type="text" name='fname' required />
-                        {/* {renderErrorMessage("fname")} */}
+                        {renderErrorMessage("fname")}
                     </div>
                     <div className='Register__container' style={{ flex: 1 }}>
                         <label>Lastname</label>
                         <input type="text" name='lname' required />
-                        {/* {renderErrorMessage("lname")} */}
+                        {renderErrorMessage("lname")}
                     </div>
                 </div>
                 <div className='Register__container'>
