@@ -57,7 +57,7 @@ function Login() {
           {renderErrorMessage("upass")}
         </div>
         <div className='Button__container'>
-          <input type="submit"/>
+          <input type="submit" />
         </div>
       </form>
     </div>

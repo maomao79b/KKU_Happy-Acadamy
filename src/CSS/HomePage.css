@@ -9,9 +9,17 @@ body, html {
     /* Full height */
     height: 100%;
     width: 100%;
-    filter: blur(2px);
+    filter: blur(0px);
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+.test-bg {
+  background-color: red;
+}
+
+.bg-color {
+  background-color: darkgray;
+}

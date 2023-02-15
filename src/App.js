@@ -5,10 +5,14 @@ import { Routes, Route } from 'react-router-dom'
 import Register from './Component/Register';
 import Navbar from './Component/Nav';
 import HomePage from './Component/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <div>
+      <div className='sticky-top'>
         <Navbar />
+      </div>
       <div className='App'>
         <Routes>
           <Route path='/' exact element={<HomePage />}/>

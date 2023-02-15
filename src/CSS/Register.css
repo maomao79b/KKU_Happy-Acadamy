@@ -1,6 +1,6 @@
 input[type="text"],input[type="email"],
   input[type="password"] {
-    height: 25px;
+    height: 38px;
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
   
@@ -51,4 +51,11 @@ input[type="text"],input[type="email"],
     flex-direction: column;
     gap: 8px;
     margin: 10px;
+  }
+
+  .error-message{
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: red;
+    margin-top: 0.2rem;
   }
