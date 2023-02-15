@@ -4,34 +4,39 @@ import '../CSS/Register.css';
 
 function Register() {
     const [errorMessages, setErrorMessages] = useState({})
-    const [isSubmitted, setIsSubmitted] = useState(false)
+    // const [isSubmitted, setIsSubmitted] = useState(false)
     const renderErrorMessage = (name) =>
         name === errorMessages.name && (
             <div className="error">{errorMessages.message}</div>
         );
-    const database = [];
     const errors = {
-        uname: "invalid username",
-        upass: "invalid password"
+        uname: "Username already exists",
+        upass: "Passwords do not match"
     };
     const handleSubmit = (event) => {
         // prevent page reload
         event.preventDefault();
-        var { uname, upass } = document.forms[0]
+        var { fname, lname, email, upass, uconfpass } = document.forms[0] // ดึงข้อมูลจาก input form ตาม name
 
-        const userData = database.find((user) => user.username === uname.value);
+        // นำ email จาก register ไปตรวจสอบใน database
+        // นำ username จาก register ไปตรวจสอบใน database
+        // ตั้ง password 8 ตัว(ถ้าอยากจะทำ)
+        // ตรวจ password และ confirm password ให้ตรงกัน
 
-        if (userData) {
-            if (userData.password !== upass.value) {
-                // Invalid password
-                setErrorMessages({ name: "upass", message: errors.upass });
-            } else {
-                setIsSubmitted(true);
-            }
-        } else {
-            // Username not found
-            setErrorMessages({ name: "uname", message: errors.uname });
-        }
+
+
+        // const userData = database.find((user) => user.username === uname.value);
+        // if (true) { // 
+        //     if (userData.password !== upass.value) {
+        //         // Invalid password
+        //         setErrorMessages({ name: "upass", message: errors.upass });
+        //     } else {
+        //         setIsSubmitted(true);
+        //     }
+        // } else {
+        //     // Username not found
+        //     setErrorMessages({ name: "uname", message: errors.uname });
+        // }
     };
 
     const formForRegister = (
@@ -41,12 +46,12 @@ function Register() {
                     <div className='Register__container' style={{ flex: 1 }}>
                         <label>Firstname</label>
                         <input type="text" name='fname' required />
-                        {renderErrorMessage("fname")}
+                        {/* {renderErrorMessage("fname")} */}
                     </div>
                     <div className='Register__container' style={{ flex: 1 }}>
                         <label>Lastname</label>
                         <input type="text" name='lname' required />
-                        {renderErrorMessage("lname")}
+                        {/* {renderErrorMessage("lname")} */}
                     </div>
                 </div>
                 <div className='Register__container'>
@@ -67,10 +72,10 @@ function Register() {
                 <div className='Register__container'>
                     <label>Comfirm Password</label>
                     <input type="password" name="uconfpass" required />
-                    {/* {renderErrorMessage("upass")} */}
+                    {renderErrorMessage("uconfpass")}
                 </div>
                 <div className='Button__container'>
-                    <input type="submit" onChange={handleSubmit}/>
+                    <input type="submit"/>
                 </div>
             </form>
         </div>
@@ -80,7 +85,8 @@ function Register() {
         <div className="App">
             <div className="Register__form">
                 <div className="Register__title">Register</div>
-                {isSubmitted ? <div>Register Success</div> : formForRegister}
+                    {formForRegister}
+                {/* {isSubmitted ? <div>Register Success</div> : formForRegister} */}
             </div>
         </div>
     );

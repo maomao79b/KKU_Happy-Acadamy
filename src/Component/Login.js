@@ -2,10 +2,6 @@ import React,{ useState } from 'react';
 import './../App.css';
 import '../CSS/Login.css';
 
-function CheckLogin(){
-  
-}
-
 function Login() {
   const [errorMessages, setErrorMessages] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -61,7 +57,7 @@ function Login() {
           {renderErrorMessage("upass")}
         </div>
         <div className='Button__container'>
-          <input type="submit"  onClick={CheckLogin}/>
+          <input type="submit"/>
         </div>
       </form>
     </div>
