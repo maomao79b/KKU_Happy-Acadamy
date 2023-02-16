@@ -1,6 +1,6 @@
 import React from "react";
 import '../CSS/HomePage.css'
-import LoadData from "../Model/loadData.js"
+// import LoadData from "../Model/loadData.js"
 import 'bootstrap/dist/css/bootstrap.min.css';
 function HomePage(){
     return (
@@ -9,7 +9,7 @@ function HomePage(){
             <div className='row'>
                 <div className='col-6'>
                     this is left panal
-                    <LoadData />
+                    {/* <LoadData /> */}
                 </div>
                 <div className='col-6'>
                     this is right panal
