@@ -1,7 +1,16 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
+const proxy = require("http-proxy-middleware");
+// useEffect(() => {
+//   axios.post("/login", { username: user.username, password: user.password }).then((res) => {
+//     console.log(res.data['token'])
+//   });
+// });
 
-app.use(express.json());
-app.use(cors({ origin: "*" , methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}));
-
+module.exports = function (app) {
+  app.use(
+    proxy("/login", {
+      target: "http://tsmapi.suksan.group",
+      secure: false,
+      changeOrigin: true,
+    })
+  );
+};

@@ -8,6 +8,10 @@ function Login() {
     username: "",
     password: "",
   });
+  const [token, setToken] = useState({
+    token: ""
+  })
+
   // const [isSubmitted, setIsSubmitted] = useState(false)
   const handleUserInput = (name, value) => {
     setUser({
@@ -16,11 +20,14 @@ function Login() {
     });
   };
 
-  useEffect(() => {
-    axios.post("/login", { username: user.username, password: user.password }).then((res) => {
-      console.log(res.data['token'])
-    });
-  });
+  // useEffect(() => {
+  //   axios
+  //     .post(`/login`, { username: user.username, password: user.password })
+  //     .then((res) => {
+  //       setToken({token:res.data['token']})
+  //       // console.log(token.token)
+  //     });
+  // })
 
   const handleSubmit = (event) => {
     // prevent page reload
@@ -75,7 +82,7 @@ function Login() {
           {/* {renderErrorMessage("upass")} */}
         </div>
         <div className="Button__container">
-          <input type="submit" />
+          <input type="submit"/>
         </div>
       </form>
     </div>
