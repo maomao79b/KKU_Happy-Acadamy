@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 // }
 // module.exports  = { PostUser, GetUser};
 
-const GetUsers = fetch('http://localhost:8080/getUsers')
+const GetUsers = fetch('https://api.postman.com/collections/23711124-fc517b7d-1206-42ea-a6d0-4e2dc0bac3df?access_key=PMAT-01GSD7YNYDX4HHYA264893NJ8V')
 .then(function (response) {
   return response.json() // แปลงข้อมูลที่ได้เป็น json
   // return "GET USER"

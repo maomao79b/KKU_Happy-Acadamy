@@ -9,7 +9,7 @@ function HomePage(){
             <div className='row'>
                 <div className='col-6'>
                     this is left panal
-                    {/* <LoadData /> */}
+                    <LoadData />
                 </div>
                 <div className='col-6'>
                     this is right panal
