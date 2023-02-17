@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./../App.css";
 import "../CSS/Login.css";
-// import axios from "axios";
+import axios from "axios";
 
 function Login() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-  const [token, setToken] = useState({
-    token: ""
-  })
+  const [tokenLogin, setToken] = useState(null)
 
   // const [isSubmitted, setIsSubmitted] = useState(false)
   const handleUserInput = (name, value) => {
@@ -20,6 +18,16 @@ function Login() {
     });
   };
 
+  function checkLogin(){
+    axios.post(
+      '/login', 
+      { username: user.username, password: user.password }
+    ).then(res => {
+      setToken(res.data)
+    }).catch(error => {
+      console.error(error)
+    });
+  }
   // useEffect(() => {
   //   axios
   //     .post(`/login`, { username: user.username, password: user.password })
@@ -37,6 +45,7 @@ function Login() {
       event.preventDefault();
       event.stopPropagation();
     }
+    console.log(tokenLogin['token'])
     // let response = fetch("http://tsmapi.suksan.group/login", {
 
     //   method: "POST",
@@ -82,7 +91,7 @@ function Login() {
           {/* {renderErrorMessage("upass")} */}
         </div>
         <div className="Button__container">
-          <input type="submit"/>
+          <input type="submit" onClick={checkLogin()}/>
         </div>
       </form>
     </div>
