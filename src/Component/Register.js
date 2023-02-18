@@ -4,18 +4,21 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
 import "../CSS/Register.css";
-//import GetUsers from "../Model/loadData";
-// const GetUsers =  require("../Model/loadData");
+import axios from "axios";
+
 function Register() {
-  // const user = GetUsers.
-  // console.log(user , "THIS Register")
   const [validated, setValidated] = useState(false);
-  const [errorMessages, setErrorMessages] = useState({
-    confirmPassword: "",
-  });
   const [fromInput, setFormInput] = useState({
+    username: "",
+    name: "",
+    surname: "",
+    address: "",
+    t_address: "",
+    a_address: "",
+    p_address: "",
+    zipcode: "",
+    tel: "",
     password: "",
     confirmPassword: "",
   });
@@ -32,99 +35,188 @@ function Register() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      registerCustomer(fromInput)
     }
     setValidated(true);
-    // console.log(fromInput.password,fromInput.confirmPassword)
-    // นำ email จาก register ไปตรวจสอบใน database
-    // ตั้ง password 8 ตัว(ถ้าอยากจะทำ) == success
-    // ตรวจ password และ confirm password ให้ตรงกัน == success
-
-    // Variable for keep message error
-    let inputError = {
-      confirmPassword: "",
-    };
-
-    if (fromInput.password !== fromInput.confirmPassword) {
-      setErrorMessages({
-        ...inputError,
-        confirmPassword: "Passwords do not match",
-      });
-      return;
-    } else {
-      // setCharactersPassword = true;
-      setErrorMessages({
-        ...inputError,
-        confirmPassword: "",
-      });
-      return;
-    }
   };
 
   // Form for login
   const formForRegister = (
     <Form noValidate validated={validated} onSubmit={validateFormInput}>
+      {/* User's Detail */}
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Firstname</Form.Label>
-          <Form.Control type="text" required name="firstName" />
+          <Form.Label>ชื่อ</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="^[^0-9]+$"
+            required
+            name="name"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
           <Form.Control.Feedback type="invalid">
-            Please enter your Firstname
+            กรุณากรอกชื่อ
           </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>Lastname</Form.Label>
-          <Form.Control type="text" required name="lastName" />
+          <Form.Label>นามสกุล</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="^[^0-9]+$"
+            required
+            name="surname"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
           <Form.Control.Feedback type="invalid">
-            Please enter your Lastname
+            กรุณากรอกนามสกุล
           </Form.Control.Feedback>
         </Form.Group>
       </Row>
 
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" required name="email" />
+          <Form.Label>เบอร์โทร</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="[0-9]{9,10}"
+            name="tel"
+            required
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
           <Form.Control.Feedback type="invalid">
-            Please enter your email
+            กรุณากรอกเบอร์โทร
           </Form.Control.Feedback>
         </Form.Group>
 
+        <Form.Group as={Col}></Form.Group>
+      </Row>
+
+      {/* User's Address  */}
+      <Form.Group className="mb-3">
+        <Form.Label>ที่อยู่</Form.Label>
+        <Form.Control
+          type="text"
+          required
+          name="address"
+          onChange={({ target }) => {
+            handleUserInput(target.name, target.value);
+          }}
+        />
+        <Form.Control.Feedback type="invalid">
+          กรุณากรอกที่อยู่
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Phone</Form.Label>
-          <Form.Control type="text" pattern="[0-9]{10}" name="phone" required/>
+          <Form.Label>ตำบล</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="^[^0-9]+$"
+            required
+            name="t_address"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
+          <Form.Control.Feedback type="invalid">
+            กรุณากรอกตำบล
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>อำเภอ</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="^[^0-9]+$"
+            required
+            name="a_address"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
+          <Form.Control.Feedback type="invalid">
+            กรุณากรอกอำเภอ
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+
+      <Row className="mb-3">
+        <Form.Group as={Col}>
+          <Form.Label>จังหวัด</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="^[^0-9]+$"
+            required
+            name="p_address"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
+          <Form.Control.Feedback type="invalid">
+            กรุณากรอกจังหวัด
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>รหัสไปรษณีย์</Form.Label>
+          <Form.Control
+            type="text"
+            pattern="[0-9]{5}"
+            required
+            name="zipcode"
+            onChange={({ target }) => {
+              handleUserInput(target.name, target.value);
+            }}
+          />
+          <Form.Control.Feedback type="invalid">
+            กรุณากรอกรหัสไปรษณีย์
+          </Form.Control.Feedback>
         </Form.Group>
       </Row>
 
       <Form.Group className="mb-3">
-        <Form.Label>Address</Form.Label>
-        <Form.Control type="text" required name="address" />
+        <Form.Label>ชื่อผู้ใช้</Form.Label>
+        <Form.Control
+          type="text"
+          required
+          name="username"
+          onChange={({ target }) => {
+            handleUserInput(target.name, target.value);
+          }}
+        />
         <Form.Control.Feedback type="invalid">
-          Please enter your Address
+          กรุณากรอกชื่อผู้ใช้
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>รหัสผ่าน</Form.Label>
         <Form.Control
           type="password"
           name="password"
           required
           value={fromInput.password}
-          pattern="[A-Za-z0-9_@#.$!^&*%+-]{8,100}"
+          pattern="[A-Za-z0-9_@#.!^&*%+-=()]{8,100}"
           onChange={({ target }) => {
             handleUserInput(target.name, target.value);
           }}
         />
         {fromInput.password.length < 8 ? (
           <Form.Control.Feedback type="invalid">
-            Passwords length must ne atleast 8 characters
+            รหัสผ่านต้องมีอย่างน้อย 8 อักขระ
           </Form.Control.Feedback>
         ) : null}
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Confirm Password</Form.Label>
+        <Form.Label>ยืนยันรหัสผ่าน</Form.Label>
         <Form.Control
           type="password"
           required
@@ -136,25 +228,45 @@ function Register() {
           }}
         />
         <Form.Control.Feedback type="invalid">
-            Passwords do not match
-          </Form.Control.Feedback>
+          รหัสผ่านไม่ตรงกัน
+        </Form.Control.Feedback>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Row className="justify-content-center">
+        <Col xs="auto">
+          <Button
+            variant="primary"
+            type="submit"
+            style={{ height: "50px", textAlign: "center", textJustify: "auto" }}
+          >
+            ยืนยันการสมัครสมาชิก
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 
   return (
     <div className="App">
       <div className="Register__form">
-        <div className="Register__title">Register</div>
+        <div className="Register__title">สมัครสมาชิก</div>
         {formForRegister}
-        {/* {isSubmitted ? <div>Register Success</div> : formForRegister} */}
       </div>
     </div>
   );
 }
 
 export default Register;
+
+async function registerCustomer(fromInput){
+  await axios
+    .post("/customers", fromInput)
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  console.log("Register Success");
+  console.log(fromInput)
+}

@@ -15,7 +15,7 @@ function Navbar() {
           <div className="col-2 ">
             <div className="flex v-center">
               <Link to="/" className="font_color_w no-line link-hov">
-                Home
+                หน้าหลัก
               </Link>
               {/* <Link to="/about" className="font_color_w no-line link-hov">
                 About
@@ -28,10 +28,10 @@ function Navbar() {
           <div className="col-3">
             <div className="flex v-center">
               <Link to="/login" className="font_color_w no-line link-hov">
-                Login
+                เข้าสู่ระบบ
               </Link>
               <Link to="/register" className="font_color_w no-line link-hov">
-                Register
+                สมัครสมาชิก
               </Link>
             </div>
           </div>

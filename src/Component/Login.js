@@ -1,41 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./../App.css";
 import "../CSS/Login.css";
 import axios from "axios";
 
+var sendToken;
 function Login() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-  const [tokenLogin, setToken] = useState(null)
-
-  // const [isSubmitted, setIsSubmitted] = useState(false)
   const handleUserInput = (name, value) => {
     setUser({
       ...user,
       [name]: value,
     });
   };
-
-  function checkLogin(){
-    axios.post(
-      '/login', 
-      { username: user.username, password: user.password }
-    ).then(res => {
-      setToken(res.data)
-    }).catch(error => {
-      console.error(error)
-    });
-  }
-  // useEffect(() => {
-  //   axios
-  //     .post(`/login`, { username: user.username, password: user.password })
-  //     .then((res) => {
-  //       setToken({token:res.data['token']})
-  //       // console.log(token.token)
-  //     });
-  // })
 
   const handleSubmit = (event) => {
     // prevent page reload
@@ -45,29 +24,13 @@ function Login() {
       event.preventDefault();
       event.stopPropagation();
     }
-    console.log(tokenLogin['token'])
-    // let response = fetch("http://tsmapi.suksan.group/login", {
-
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // console.log(user.username,user.password)
+    getTokenLogin(user);
   };
   const formForLogin = (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="Login__container">
-          <label>Username</label>
+          <label>ชื่อผู้ใช้</label>
           <input
             type="text"
             name="username"
@@ -76,10 +39,9 @@ function Login() {
               handleUserInput(target.name, target.value);
             }}
           />
-          {/* {renderErrorMessage("uname")} */}
         </div>
         <div className="Login__container">
-          <label>Password</label>
+          <label>รหัสผ่าน</label>
           <input
             type="password"
             name="password"
@@ -88,10 +50,9 @@ function Login() {
               handleUserInput(target.name, target.value);
             }}
           />
-          {/* {renderErrorMessage("upass")} */}
         </div>
         <div className="Button__container">
-          <input type="submit" onClick={checkLogin()}/>
+          <input type="submit" />
         </div>
       </form>
     </div>
@@ -100,12 +61,27 @@ function Login() {
   return (
     <div className="App">
       <div className="Login__form">
-        <div className="Login__title">Login</div>
+        <div className="Login__title">เข้าสู่ระบบ</div>
         {formForLogin}
-        {/* {isSubmitted ? <div>Login Success</div> : formForLogin} */}
       </div>
     </div>
   );
 }
 
 export default Login;
+
+export function sendLoginToken() {
+  return sendToken;
+}
+
+async function getTokenLogin(user) {
+  await axios
+    .post("/login", { username: user.username, password: user.password })
+    .then((res) => {
+      sendToken = res.data["token"];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  console.log("Login Success");
+}
