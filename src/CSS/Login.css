@@ -1,66 +1,130 @@
-
-input[type="text"],
-  input[type="password"] {
-    height: 38px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-  }
-  
-  input[type="submit"] {
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    background: #a7afad;
-    border: 1px solid #a7afad;
-    color: #000000;
-    padding: 10px 20px;
-    transition: 0.5s;
-  }
-  
-  input[type="submit"]:hover {
-    background: #000000;
-    color: #fcfcfc;
-    transition: 1s;
-    border-radius: 90px;
-  }
-  
-  .Button__container {
-    display: flex;
-    justify-content: center;
-  }
-  
+/* Styles for screens smaller than 768px */
+@media (max-width: 767px) {
   .Login__form {
-    background-color: white;
-    padding: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 20px;
+    max-width: 90%; /* Reduce the width of the form */
+    margin: 0 auto; /* Center the form horizontally */
   }
-  
-  .list-container {
-    display: flex;
-  }
-  
-  .error {
-    color: red;
-    font-size: 12px;
-  }
-  
-  .Login__title {
-    font-size: 25px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
+}
+
+/* Styles for screens larger than 768px */
+@media (min-width: 768px) {
   .Login__container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 10px;
+    flex-direction: row; /* Change the layout to a row */
+    align-items: center; /* Center the items vertically */
   }
 
-  .BgPic {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://thumbor.forbes.com/thumbor/fit-in/960x600/https://www.forbes.com/wheels/wp-content/uploads/2022/09/2023_Mercedes-Benz_Sclass_Gallery1.jpg");
-    margin-left: 0px;
-    margin-right: 0px;
-    width: auto;
-    object-fit: cover;
+  .Login__form {
+    flex: 1; /* Make the form fill the available width */
+    margin-right: 2rem; /* Add some space between the form and the list */
   }
+
+  .list-container {
+    flex: 1; /* Make the list fill the available width */
+  }
+
+  .Button__container {
+    justify-content: flex-end; /* Align the button to the right */
+  }
+}
+
+/* Styles for screens larger than 1200px */
+@media (min-width: 1200px) {
+  .BgPic {
+    height: 500px; /* Adjust the height of the background image */
+  }
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  padding: 0.5rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+
+.form-control:invalid {
+  border-color: #dc3545;
+}
+
+.form-control:invalid:focus {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.form-control-feedback {
+  display: none;
+  font-size: 0.8rem;
+  color: #dc3545;
+}
+
+.form-control:invalid + .form-control-feedback {
+  display: block;
+}
+
+.form-control-feedback.valid-feedback {
+  color: #28a745;
+}
+
+.form-control-feedback.valid-feedback:before {
+  content: "\\2714";
+}
+
+.form-control-feedback.invalid-feedback:before {
+  content: "\\2718";
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1.2rem;
+  height: 50px;
+  text-align: center;
+  text-justify: auto;
+  border-radius: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.btn-primary:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #0062cc;
+  border-color: #005cbf;
+}
+
+.btn-primary:active:focus,
+.btn-primary.active:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+

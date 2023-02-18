@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./../App.css";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
-import Button from "react-bootstrap/Button";
+import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import "../CSS/Register.css";
 import axios from "axios";
 
@@ -35,8 +32,8 @@ function Register() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    }else{
-      registerCustomer(fromInput)
+    } else {
+      registerCustomer(fromInput);
     }
     setValidated(true);
   };
@@ -246,27 +243,74 @@ function Register() {
     </Form>
   );
 
-  return (
-    <div className="App">
-      <div className="Register__form">
-        <div className="Register__title">สมัครสมาชิก</div>
-        {formForRegister}
-      </div>
-    </div>
-  );
+  return formForRegister;
 }
 
 export default Register;
 
-async function registerCustomer(fromInput){
+async function registerCustomer(fromInput) {
   await axios
     .post("/customers", fromInput)
     .then((res) => {
-      console.log(res.data)
+      console.log(res.data);
     })
     .catch((error) => {
       console.error(error);
     });
   console.log("Register Success");
-  console.log(fromInput)
+  console.log(fromInput);
 }
+
+
+// import React from 'react';
+// import {
+//   MDBBtn,
+//   MDBContainer,
+//   MDBCard,
+//   MDBCardBody,
+//   MDBCol,
+//   MDBRow,
+//   MDBInput,
+//   MDBCheckbox,
+//   MDBIcon
+// }
+// from 'mdb-react-ui-kit';
+
+// function Register() {
+//   return (
+//     <MDBContainer fluid>
+
+//       <div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '200px'}}></div>
+
+//       <MDBCard className='mx-1 mb-2 shadow-5' style={{marginTop: '-100px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)',height:"600px"}}>
+//         <MDBCardBody className='p-5 text-center'>
+
+//           <h2 className="fw-bold mb-5">ลงทะเบียน</h2>
+
+//           <MDBRow>
+//             <MDBCol col='6'>
+//               <MDBInput wrapperClass='mb-4' label='ชื่อ' id='form1' type='text'/>
+//             </MDBCol>
+
+//             <MDBCol col='6'>
+//               <MDBInput wrapperClass='mb-4' label='นามสกุล' id='form1' type='text'/>
+//             </MDBCol>
+//           </MDBRow>
+
+//           <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
+//           <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
+
+//           <div className='d-flex justify-content-center mb-4'>
+//             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
+//           </div>
+
+//           <MDBBtn className='w-100 mb-4' size='md'>ยืนยันลงทะเบียน</MDBBtn>
+
+//         </MDBCardBody>
+//       </MDBCard>
+
+//     </MDBContainer>
+//   );
+// }
+
+// export default Register;

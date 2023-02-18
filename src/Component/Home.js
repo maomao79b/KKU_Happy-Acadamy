@@ -4,19 +4,14 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCustomers } from "../Model/loadData.js";
 import { sendLoginToken } from "./Login";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function HomePage(){
   const [customers, setcustomers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredData = customers.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const search = (
-    <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,7 +31,74 @@ function HomePage(){
           console.log(error);
         });
       }
+
   }, []);
+  const searchData =() => {
+    const token = sendLoginToken();
+    if(searchQuery !== null){
+      const filteredData = customers?.filter(item =>
+        item.name.includes(searchQuery)
+        );
+        console.log(filteredData)
+      if(customers === null){
+        const filteredData = customers
+        setcustomers(filteredData)
+      }else{
+        setcustomers(filteredData)
+      }
+      // if(filteredData !== null){
+      //   let jsonData = JSON.stringify(filteredData)
+      //   setcustomers(jsonData)
+      //   console.log(jsonData)
+      // }else{
+      //   let jsonData = ""
+      //   console.log(jsonData)
+      // }
+    }
+  }
+
+
+
+  // if(filteredData !== null){
+  //   setcustomers(setcustomers)
+  // } 
+  // let filteredData
+
+  // if(searchQuery.length() !== 0){
+  //     if(item.name === searchQuery){
+
+  //     }elseif(contacts.get('name')){
+
+  //     }elseif(item.username === searchQuery){
+
+  //     }
+  // }
+  // setcustomers(filteredData)
+
+  const search = (
+    <Form>
+      <Form.Control
+          type="search"
+          required
+          name="search"
+          // onChange={({ target })=> {
+          //   setSearchQuery(target.value)
+          //   searchData()
+          // }}
+        />
+        <Button
+            variant="primary"
+            type=""
+            style={{ height: "50px", textAlign: "center", textJustify: "auto" }}
+            onChange={({ target })=> {
+              setSearchQuery(target.value)
+              searchData()
+            }}
+        >
+            ค้นหา
+        </Button>
+    </Form>
+  );
 
   return (
       <div className="container">
@@ -51,6 +113,7 @@ function HomePage(){
             <br/>
             <br/>
             <h1>ตารางรายชื่อลูกค้า</h1>
+            {search}
             <Table striped bordered hover>
                 <thead>
                     <tr>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import { PrimaryNav, MenuLink, Menu, Hamburger } from '../CSS/NavElement.js'
 import '../CSS/Nav.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import 
@@ -38,30 +37,6 @@ function Navbar() {
         </div>
       </div>
     </header>
-
-    // <>
-    //   <PrimaryNav>
-    //     <Hamburger />
-    //     <Menu>
-    //       <MenuLink to="/" >
-    //         Home
-    //       </MenuLink>
-    //       <MenuLink to="/about" >
-    //         About
-    //       </MenuLink>
-    //       <MenuLink to="/about" >
-    //         <div style={{width:"40rem"}}>
-    //         </div>
-    //       </MenuLink>
-    //       <MenuLink to="/login">
-    //         Login
-    //       </MenuLink>
-    //       <MenuLink to="/register" >
-    //         Register
-    //       </MenuLink>
-    //     </Menu>
-    //   </PrimaryNav>
-    // </>
   );
 }
 export default Navbar

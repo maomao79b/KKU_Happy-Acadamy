@@ -1,0 +1,64 @@
+body, html {
+    height: 100%;
+  }
+  
+  .bg {
+    /* The image used */
+    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1623.jpeg");
+  
+    /* Full height */
+    height: 100%;
+    width: 100%;
+    filter: blur(0px);
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.test-bg {
+  background-color: red;
+}
+
+.bg-color {
+  background-color: darkgray;
+}
+
+.loader-container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.0);
+  z-index: 1;
+}
+
+h1 {
+  text-align: center;
+  text-indent: 50px;
+}
+
+.text-center{
+  height: 50rem;
+}
+
+.spinner {
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  border: 8px solid;
+  border-color: #3d5af1 transparent #3d5af1 transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+

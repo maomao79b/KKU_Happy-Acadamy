@@ -1,29 +1,31 @@
+/* Set default styles for body and html */
 body, html {
-    height: 100%;
-  }
-  
-  .bg {
-    /* The image used */
-    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1623.jpeg");
-  
-    /* Full height */
-    height: 100%;
-    width: 100%;
-    filter: blur(0px);
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  height: 100%;
+}
 
+/* Set background image and full height */
+.bg {
+  background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1623.jpeg");
+  height: 100vh; /* use viewport height instead of 100% to cover full screen */
+  width: 100%;
+  filter: blur(0px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Add background color and set minimum height */
+.bg-color {
+  background-color: darkgray;
+  min-height: 100vh; /* use viewport height to ensure background fills full screen */
+}
+
+/* Add red background color for test purposes */
 .test-bg {
   background-color: red;
 }
 
-.bg-color {
-  background-color: darkgray;
-}
-
+/* Set up loader container */
 .loader-container {
   width: 70%;
   display: flex;
@@ -34,15 +36,18 @@ body, html {
   z-index: 1;
 }
 
+/* Center and indent text */
 h1 {
   text-align: center;
   text-indent: 50px;
 }
 
+/* Set minimum height for text container */
 .text-center{
-  height: 50rem;
+  min-height: 80rem; /* use viewport height to ensure text container fills at least half the screen */
 }
 
+/* Set up spinner animation */
 .spinner {
   width: 64px;
   height: 64px;
@@ -53,6 +58,7 @@ h1 {
   animation: spin-anim 1.2s linear infinite;
 }
 
+/* Set up keyframes for spinner animation */
 @keyframes spin-anim {
   0% {
       transform: rotate(0deg);
@@ -62,3 +68,15 @@ h1 {
   }
 }
 
+/* Add media query to adjust styles for smaller screens */
+@media screen and (max-width: 768px) {
+  /* Reduce text indent for smaller screens */
+  h1 {
+    text-indent: 30px;
+  }
+  
+  /* Adjust width of loader container for smaller screens */
+  .loader-container {
+    width: 90%;
+  }
+}
