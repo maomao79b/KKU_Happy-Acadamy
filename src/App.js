@@ -1,23 +1,21 @@
 import React from "react";
-import Login from "./Component/Login";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Register from "./Component/Register";
 import Navbar from "./Component/Nav";
-import HomePage from "./Component/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes } from "react-router";
+import Login from "./Component/Login";
+import Register from "./Component/Register";
+import Home from "./Component/Home";
+
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      <Routes>
+          <Route path="/" exact element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Register />}/>
         </Routes>
-      </div>
     </div>
   );
 }

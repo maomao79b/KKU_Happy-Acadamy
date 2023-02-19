@@ -27,11 +27,15 @@ body, html {
 
 /* Set up loader container */
 .loader-container {
-  width: 70%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
   background: rgba(0, 0, 0, 0.0);
   z-index: 1;
 }
@@ -77,6 +81,6 @@ h1 {
   
   /* Adjust width of loader container for smaller screens */
   .loader-container {
-    width: 90%;
+    width: 80%;
   }
 }

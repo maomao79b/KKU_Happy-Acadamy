@@ -3,11 +3,12 @@ import '../CSS/HomePage.css'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCustomers } from "../Model/loadData.js";
-import { sendLoginToken } from "./Login";
+import { getLoginToken } from "./Login";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Navbar from "./Nav";
 
-function HomePage(){
+function Home(){
   const [customers, setcustomers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +16,7 @@ function HomePage(){
 
   useEffect(() => {
     setIsLoading(true);
-    const token = sendLoginToken();
+    const token = getLoginToken();
     const url = '/customers';
     if(token !== null){
       getCustomers(url, token)
@@ -34,7 +35,7 @@ function HomePage(){
 
   }, []);
   const searchData =() => {
-    const token = sendLoginToken();
+    const token = getLoginToken();
     if(searchQuery !== null){
       const filteredData = customers?.filter(item =>
         item.name.includes(searchQuery)
@@ -101,17 +102,15 @@ function HomePage(){
   );
 
   return (
-      <div className="container">
+    <>
+      <Navbar />
+      <div className="container mb-6" style={{margin:"auto auto"}}>
         {isLoading ? (
           <div className="loader-container">
             <div className="spinner"></div>
           </div>
         ) : (
           <div className="main-container">
-            <div className="text-center">
-            </div>
-            <br/>
-            <br/>
             <h1>ตารางรายชื่อลูกค้า</h1>
             {search}
             <Table striped bordered hover>
@@ -137,6 +136,7 @@ function HomePage(){
           </div>
           )}
       </div>
+    </>
      )
 }
-export default HomePage
+export default Home

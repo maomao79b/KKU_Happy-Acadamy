@@ -3,9 +3,13 @@ import "./../App.css";
 import "../CSS/Login.css";
 import axios from "axios";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import Register from "./Register";
 
-var sendToken;
+var sendToken = null;
+var loginStatus = null;
 function Login() {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [user, setUser] = useState({
     username: "",
@@ -18,30 +22,37 @@ function Login() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // prevent page reload
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
-      getTokenLogin(user);
+      await getTokenLogin(user);
+      if (loginStatus === 200) {
+        navigate("/home");
+      }
+      setValidated(false);
     }
-    setValidated(true);
+    console.log(!Boolean(user.username) && validated);
   };
 
   const formForLogin = (
-    <Card>
+    <Card className="login-card">
       <Card.Body>
-        <Card.Title style={{textAlign:"center"}}>เข้าสู่ระบบ</Card.Title>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formUsername">
-            <Form.Label>ชื่อผู้ใช้</Form.Label>
+        <Card.Title className="login-card-title">เข้าสู่ระบบ</Card.Title>
+        <Form noValidate onSubmit={handleSubmit} className="login-form">
+          <Form.Group>
+            <Form.Label className="login-form-label">ชื่อผู้ใช้</Form.Label>
             <Form.Control
+              className="login-form-input"
               type="text"
               required
               name="username"
+              isInvalid={!Boolean(user.username) && validated}
               onChange={({ target }) => {
                 handleUserInput(target.name, target.value);
               }}
@@ -51,12 +62,14 @@ function Login() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>รหัสผ่าน</Form.Label>
+          <Form.Group>
+            <Form.Label className="login-form-label">รหัสผ่าน</Form.Label>
             <Form.Control
+              className="login-form-input"
               type="password"
               required
               name="password"
+              isInvalid={!Boolean(user.password) && validated}
               onChange={({ target }) => {
                 handleUserInput(target.name, target.value);
               }}
@@ -66,25 +79,31 @@ function Login() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Row className="justify-content-center">
-            <Col xs="12" sm="auto">
+          <Row style={{ marginTop: "20px", textAlign: "center" }}>
+            <Col>
               <Button variant="primary" type="submit">
                 เข้าสู่ระบบ
               </Button>
             </Col>
+          </Row>
+          <Row style={{marginTop:"20px"}}>
+            <Link to="/register" style={{textDecoration:"none"}}>ลงทะเบียน</Link>
           </Row>
         </Form>
       </Card.Body>
     </Card>
   );
 
-  return formForLogin;
+  return <div className="login-container">{formForLogin}</div>;
 }
 
 export default Login;
 
-export function sendLoginToken() {
+export function getLoginToken() {
   return sendToken;
+}
+export function getLoginStatus() {
+  return loginStatus;
 }
 
 async function getTokenLogin(user) {
@@ -92,10 +111,11 @@ async function getTokenLogin(user) {
     .post("/login", { username: user.username, password: user.password })
     .then((res) => {
       sendToken = res.data["token"];
-      console.log("Login Success");
+      loginStatus = res.status;
+      console.log(loginStatus);
     })
     .catch((error) => {
-      console.error(error);
+      loginStatus = error["request"]["status"];
+      console.log(loginStatus);
     });
 }
-

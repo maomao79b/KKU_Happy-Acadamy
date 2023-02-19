@@ -1,130 +1,43 @@
-/* Styles for screens smaller than 768px */
-@media (max-width: 767px) {
-  .Login__form {
-    max-width: 90%; /* Reduce the width of the form */
-    margin: 0 auto; /* Center the form horizontally */
-  }
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/8671.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-/* Styles for screens larger than 768px */
-@media (min-width: 768px) {
-  .Login__container {
-    flex-direction: row; /* Change the layout to a row */
-    align-items: center; /* Center the items vertically */
-  }
-
-  .Login__form {
-    flex: 1; /* Make the form fill the available width */
-    margin-right: 2rem; /* Add some space between the form and the list */
-  }
-
-  .list-container {
-    flex: 1; /* Make the list fill the available width */
-  }
-
-  .Button__container {
-    justify-content: flex-end; /* Align the button to the right */
-  }
+.login-card {
+  width: 600px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: #fff;
 }
 
-/* Styles for screens larger than 1200px */
-@media (min-width: 1200px) {
-  .BgPic {
-    height: 500px; /* Adjust the height of the background image */
-  }
-}
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.form-control {
-  border-radius: 0.5rem;
-  border: 1px solid #ced4da;
-  padding: 0.5rem;
-}
-
-.form-control:focus {
-  box-shadow: none;
-  border-color: #80bdff;
-}
-
-.form-control:invalid {
-  border-color: #dc3545;
-}
-
-.form-control:invalid:focus {
-  border-color: #dc3545;
-  box-shadow: none;
-}
-
-.form-control-feedback {
-  display: none;
-  font-size: 0.8rem;
-  color: #dc3545;
-}
-
-.form-control:invalid + .form-control-feedback {
-  display: block;
-}
-
-.form-control-feedback.valid-feedback {
-  color: #28a745;
-}
-
-.form-control-feedback.valid-feedback:before {
-  content: "\\2714";
-}
-
-.form-control-feedback.invalid-feedback:before {
-  content: "\\2718";
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  font-size: 1.2rem;
-  height: 50px;
+.login-card-title {
   text-align: center;
-  text-justify: auto;
-  border-radius: 0.5rem;
+  margin-bottom: 20px;
+  font-size: x-large;
 }
 
-.btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
+.login-form {
+  margin-top: 20px;
 }
 
-.btn-primary:focus {
-  box-shadow: none;
-  border-color: #80bdff;
+.login-form-label {
+  font-size: 16px;
 }
 
-.btn-primary:active,
-.btn-primary.active {
-  background-color: #0062cc;
-  border-color: #005cbf;
+.login-form-input {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.btn-primary:active:focus,
-.btn-primary.active:focus {
-  box-shadow: none;
-  border-color: #80bdff;
+.login-form-submit {
+  margin-top: 20px;
+  width: 100%;
 }
-
-.btn-primary.disabled,
-.btn-primary:disabled {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-primary:not(:disabled):not(.disabled):active:focus,
-.btn-primary:not(:disabled):not(.disabled).active:focus {
-  box-shadow: none;
-  border-color: #80bdff;
-}
-

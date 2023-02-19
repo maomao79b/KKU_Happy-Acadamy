@@ -25,27 +25,30 @@ function Register() {
       [name]: value,
     });
   };
-  const validateFormInput = (event) => {
+  const validateFormInput = async (event) => {
     // prevent page reload
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
-      registerCustomer(fromInput);
+      await registerCustomer(fromInput);
+      setValidated(false);
     }
-    setValidated(true);
   };
 
-  // Form for login
   const formForRegister = (
-    <Form noValidate validated={validated} onSubmit={validateFormInput}>
-      {/* User's Detail */}
-      <Row className="mb-3">
+    <Card className="register-card">
+      <Card.Body>
+        <Card.Title className="register-card-title">ลงทะเบียน</Card.Title>
+        <Form className="register-form" noValidate validated={validated} onSubmit={validateFormInput}>
+      <Row >
         <Form.Group as={Col}>
-          <Form.Label>ชื่อ</Form.Label>
+          <Form.Label className="register-form-label">ชื่อ</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="^[^0-9]+$"
             required
@@ -60,8 +63,9 @@ function Register() {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>นามสกุล</Form.Label>
+          <Form.Label className="register-form-label">นามสกุล</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="^[^0-9]+$"
             required
@@ -76,10 +80,11 @@ function Register() {
         </Form.Group>
       </Row>
 
-      <Row className="mb-3">
+      <Row >
         <Form.Group as={Col}>
-          <Form.Label>เบอร์โทร</Form.Label>
+          <Form.Label className="register-form-label">เบอร์โทร</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="[0-9]{9,10}"
             name="tel"
@@ -96,10 +101,10 @@ function Register() {
         <Form.Group as={Col}></Form.Group>
       </Row>
 
-      {/* User's Address  */}
-      <Form.Group className="mb-3">
-        <Form.Label>ที่อยู่</Form.Label>
+      <Form.Group >
+        <Form.Label className="register-form-label">ที่อยู่</Form.Label>
         <Form.Control
+        className="register-form-input"
           type="text"
           required
           name="address"
@@ -112,10 +117,11 @@ function Register() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Row className="mb-3">
+      <Row >
         <Form.Group as={Col}>
-          <Form.Label>ตำบล</Form.Label>
+          <Form.Label className="register-form-label">ตำบล</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="^[^0-9]+$"
             required
@@ -129,8 +135,9 @@ function Register() {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>อำเภอ</Form.Label>
+          <Form.Label className="register-form-label">อำเภอ</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="^[^0-9]+$"
             required
@@ -145,10 +152,11 @@ function Register() {
         </Form.Group>
       </Row>
 
-      <Row className="mb-3">
+      <Row >
         <Form.Group as={Col}>
-          <Form.Label>จังหวัด</Form.Label>
+          <Form.Label className="register-form-label">จังหวัด</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="^[^0-9]+$"
             required
@@ -162,8 +170,9 @@ function Register() {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>รหัสไปรษณีย์</Form.Label>
+          <Form.Label className="register-form-label">รหัสไปรษณีย์</Form.Label>
           <Form.Control
+          className="register-form-input"
             type="text"
             pattern="[0-9]{5}"
             required
@@ -178,9 +187,10 @@ function Register() {
         </Form.Group>
       </Row>
 
-      <Form.Group className="mb-3">
-        <Form.Label>ชื่อผู้ใช้</Form.Label>
+      <Form.Group >
+        <Form.Label className="register-form-label">ชื่อผู้ใช้</Form.Label>
         <Form.Control
+        className="register-form-input"
           type="text"
           required
           name="username"
@@ -193,9 +203,10 @@ function Register() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>รหัสผ่าน</Form.Label>
+      <Form.Group >
+        <Form.Label className="register-form-label">รหัสผ่าน</Form.Label>
         <Form.Control
+        className="register-form-input"
           type="password"
           name="password"
           required
@@ -212,9 +223,10 @@ function Register() {
         ) : null}
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>ยืนยันรหัสผ่าน</Form.Label>
+      <Form.Group >
+        <Form.Label className="register-form-label">ยืนยันรหัสผ่าน</Form.Label>
         <Form.Control
+        className="register-form-input"
           type="password"
           required
           name="confirmPassword"
@@ -229,21 +241,20 @@ function Register() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Row className="justify-content-center">
-        <Col xs="auto">
-          <Button
-            variant="primary"
-            type="submit"
-            style={{ height: "50px", textAlign: "center", textJustify: "auto" }}
-          >
-            ยืนยันการสมัครสมาชิก
-          </Button>
-        </Col>
-      </Row>
+      <Row style={{ marginTop: "20px", textAlign: "center" }}>
+            <Col>
+              <Button variant="primary" type="submit">
+                ลงทะเบียน
+              </Button>
+            </Col>
+          </Row>
     </Form>
+      </Card.Body>
+    </Card>
+
   );
 
-  return formForRegister;
+  return <div className="register-container">{formForRegister}</div>;
 }
 
 export default Register;
@@ -260,57 +271,3 @@ async function registerCustomer(fromInput) {
   console.log("Register Success");
   console.log(fromInput);
 }
-
-
-// import React from 'react';
-// import {
-//   MDBBtn,
-//   MDBContainer,
-//   MDBCard,
-//   MDBCardBody,
-//   MDBCol,
-//   MDBRow,
-//   MDBInput,
-//   MDBCheckbox,
-//   MDBIcon
-// }
-// from 'mdb-react-ui-kit';
-
-// function Register() {
-//   return (
-//     <MDBContainer fluid>
-
-//       <div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '200px'}}></div>
-
-//       <MDBCard className='mx-1 mb-2 shadow-5' style={{marginTop: '-100px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)',height:"600px"}}>
-//         <MDBCardBody className='p-5 text-center'>
-
-//           <h2 className="fw-bold mb-5">ลงทะเบียน</h2>
-
-//           <MDBRow>
-//             <MDBCol col='6'>
-//               <MDBInput wrapperClass='mb-4' label='ชื่อ' id='form1' type='text'/>
-//             </MDBCol>
-
-//             <MDBCol col='6'>
-//               <MDBInput wrapperClass='mb-4' label='นามสกุล' id='form1' type='text'/>
-//             </MDBCol>
-//           </MDBRow>
-
-//           <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
-//           <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
-
-//           <div className='d-flex justify-content-center mb-4'>
-//             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-//           </div>
-
-//           <MDBBtn className='w-100 mb-4' size='md'>ยืนยันลงทะเบียน</MDBBtn>
-
-//         </MDBCardBody>
-//       </MDBCard>
-
-//     </MDBContainer>
-//   );
-// }
-
-// export default Register;
