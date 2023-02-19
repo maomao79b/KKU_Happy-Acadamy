@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Component/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router";
 import Login from "./Component/Login";
@@ -9,6 +8,13 @@ import Home from "./Component/Home";
 
 
 function App() {
+  // if(localStorage.getItem('loginStatus') === "true"){
+  //   return(
+  //     <Route path="/" element={<Home />} />
+  //   );
+  // }else{
+    
+  // }
   return (
     <div>
       <Routes>
@@ -18,6 +24,7 @@ function App() {
         </Routes>
     </div>
   );
+
 }
 
 export default App;

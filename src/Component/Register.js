@@ -3,6 +3,7 @@ import "./../App.css";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import "../CSS/Register.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [validated, setValidated] = useState(false);
@@ -247,6 +248,10 @@ function Register() {
                 ลงทะเบียน
               </Button>
             </Col>
+          </Row>
+
+          <Row style={{marginTop:"20px"}}>
+            <Link to="/" style={{textDecoration:"none"}}>เข้าสู่ระบบ</Link>
           </Row>
     </Form>
       </Card.Body>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../App.css";
 import "../CSS/Login.css";
 import axios from "axios";
@@ -6,8 +6,6 @@ import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import Register from "./Register";
 
-var sendToken = null;
-var loginStatus = null;
 function Login() {
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
@@ -22,6 +20,12 @@ function Login() {
     });
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('loginStatus') === 'true') {
+      navigate('/home');
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event) => {
     // prevent page reload
     event.preventDefault();
@@ -32,12 +36,11 @@ function Login() {
       setValidated(true);
     } else {
       await getTokenLogin(user);
-      if (loginStatus === 200) {
+      if (localStorage.getItem('loginStatus') === "true") {
         navigate("/home");
       }
       setValidated(false);
     }
-    console.log(!Boolean(user.username) && validated);
   };
 
   const formForLogin = (
@@ -86,6 +89,7 @@ function Login() {
               </Button>
             </Col>
           </Row>
+          
           <Row style={{marginTop:"20px"}}>
             <Link to="/register" style={{textDecoration:"none"}}>ลงทะเบียน</Link>
           </Row>
@@ -95,27 +99,30 @@ function Login() {
   );
 
   return <div className="login-container">{formForLogin}</div>;
+  // return localStorage.getItem('loginStatus') === 'true' ? (
+  //   navigate('/home')
+  // ) : (
+  //   <div className="login-container">{formForLogin}</div>
+  // );
 }
 
 export default Login;
 
-export function getLoginToken() {
-  return sendToken;
-}
-export function getLoginStatus() {
-  return loginStatus;
-}
-
+let loginStatus = null;
 async function getTokenLogin(user) {
   await axios
-    .post("/login", { username: user.username, password: user.password })
-    .then((res) => {
+  .post("/login", { username: user.username, password: user.password })
+  .then((res) => {
+    let sendToken = null
       sendToken = res.data["token"];
       loginStatus = res.status;
       console.log(loginStatus);
+      localStorage.setItem('accessToken', sendToken);
+      localStorage.setItem('loginStatus', "true");
     })
     .catch((error) => {
       loginStatus = error["request"]["status"];
+      localStorage.setItem('loginStatus', "false");
       console.log(loginStatus);
     });
 }

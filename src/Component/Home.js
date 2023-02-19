@@ -3,78 +3,66 @@ import '../CSS/HomePage.css'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCustomers } from "../Model/loadData.js";
-import { getLoginToken } from "./Login";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Navbar from "./Nav";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Home(){
+  const navigate = useNavigate();
   const [customers, setcustomers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(null);
 
 
   useEffect(() => {
+    if (localStorage.getItem('loginStatus') === 'false') {
+      navigate('/');
+    }
     setIsLoading(true);
-    const token = getLoginToken();
+    const token = localStorage.getItem('accessToken');
     const url = '/customers';
     if(token !== null){
-      getCustomers(url, token)
+      if(searchQuery === null){
+        console.log(2)
+        getCustomers(url, token)
+          .then(response => {
+          setcustomers(response.data)
+          setIsLoading(false);
+          if(response.status !== 200){
+            console.log(response.status);
+          }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+      }
+  },[]);
+
+
+  // }
+  async function searchData() {
+    const token = localStorage.getItem('accessToken');
+    const c = ''
+    if(token !== null){
+      if(searchQuery !== null){
+        axios.get(`/customers?search=${searchQuery}`, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => {
-        setcustomers(response.data)
-        setIsLoading(false);
-        if(response.status !== 200){
-          // setIsLoading(false);
+          setcustomers(response.data);
+          console.log(response.data)
+        if(response.status !== '200'){
+          console.log(1)
+          searchQuery(c)
           console.log(response.status);
         }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
       }
-
-  }, []);
-  const searchData =() => {
-    const token = getLoginToken();
-    if(searchQuery !== null){
-      const filteredData = customers?.filter(item =>
-        item.name.includes(searchQuery)
-        );
-        console.log(filteredData)
-      if(customers === null){
-        const filteredData = customers
-        setcustomers(filteredData)
-      }else{
-        setcustomers(filteredData)
-      }
-      // if(filteredData !== null){
-      //   let jsonData = JSON.stringify(filteredData)
-      //   setcustomers(jsonData)
-      //   console.log(jsonData)
-      // }else{
-      //   let jsonData = ""
-      //   console.log(jsonData)
-      // }
     }
   }
-
-
-
-  // if(filteredData !== null){
-  //   setcustomers(setcustomers)
-  // } 
-  // let filteredData
-
-  // if(searchQuery.length() !== 0){
-  //     if(item.name === searchQuery){
-
-  //     }elseif(contacts.get('name')){
-
-  //     }elseif(item.username === searchQuery){
-
-  //     }
-  // }
-  // setcustomers(filteredData)
 
   const search = (
     <Form>
@@ -82,22 +70,12 @@ function Home(){
           type="search"
           required
           name="search"
-          // onChange={({ target })=> {
-          //   setSearchQuery(target.value)
-          //   searchData()
-          // }}
+          // value={({searchQuery})}
+           onChange={({ target })=> {
+            setSearchQuery(target.value)
+            searchData()
+          }}
         />
-        <Button
-            variant="primary"
-            type=""
-            style={{ height: "50px", textAlign: "center", textJustify: "auto" }}
-            onChange={({ target })=> {
-              setSearchQuery(target.value)
-              searchData()
-            }}
-        >
-            ค้นหา
-        </Button>
     </Form>
   );
 
@@ -140,3 +118,5 @@ function Home(){
      )
 }
 export default Home
+
+
