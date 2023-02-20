@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../App.css";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import "../CSS/Register.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [fromInput, setFormInput] = useState({
     username: "",
@@ -39,6 +40,12 @@ function Register() {
       setValidated(false);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('loginStatus') === 'true') {
+      navigate('/home');
+    }
+  }, [navigate]);
 
   const formForRegister = (
     <Card className="register-card">

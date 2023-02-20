@@ -8,13 +8,6 @@ import Home from "./Component/Home";
 
 
 function App() {
-  // if(localStorage.getItem('loginStatus') === "true"){
-  //   return(
-  //     <Route path="/" element={<Home />} />
-  //   );
-  // }else{
-    
-  // }
   return (
     <div>
       <Routes>

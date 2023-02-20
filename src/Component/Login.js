@@ -4,7 +4,7 @@ import "../CSS/Login.css";
 import axios from "axios";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import Register from "./Register";
+import swal from "sweetalert";
 
 function Login() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ function Login() {
       setValidated(true);
     } else {
       await getTokenLogin(user);
-      if (localStorage.getItem('loginStatus') === "true") {
+      if (localStorage.getItem("loginStatus") === "true") {
         navigate("/home");
       }
       setValidated(false);
@@ -89,9 +89,11 @@ function Login() {
               </Button>
             </Col>
           </Row>
-          
-          <Row style={{marginTop:"20px"}}>
-            <Link to="/register" style={{textDecoration:"none"}}>ลงทะเบียน</Link>
+
+          <Row style={{ marginTop: "25px", textAlign: "center" }}>
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              ลงทะเบียน
+            </Link>
           </Row>
         </Form>
       </Card.Body>
@@ -99,11 +101,6 @@ function Login() {
   );
 
   return <div className="login-container">{formForLogin}</div>;
-  // return localStorage.getItem('loginStatus') === 'true' ? (
-  //   navigate('/home')
-  // ) : (
-  //   <div className="login-container">{formForLogin}</div>
-  // );
 }
 
 export default Login;
@@ -111,18 +108,19 @@ export default Login;
 let loginStatus = null;
 async function getTokenLogin(user) {
   await axios
-  .post("/login", { username: user.username, password: user.password })
-  .then((res) => {
-    let sendToken = null
+    .post("/login", { username: user.username, password: user.password })
+    .then((res) => {
+      let sendToken = null;
       sendToken = res.data["token"];
       loginStatus = res.status;
       console.log(loginStatus);
-      localStorage.setItem('accessToken', sendToken);
-      localStorage.setItem('loginStatus', "true");
+      localStorage.setItem("accessToken", sendToken);
+      localStorage.setItem("loginStatus", "true");
     })
     .catch((error) => {
       loginStatus = error["request"]["status"];
-      localStorage.setItem('loginStatus', "false");
+      localStorage.setItem("loginStatus", "false");
       console.log(loginStatus);
+      swal('เกิดข้อผิดพลาด', "รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง", "error");
     });
 }
