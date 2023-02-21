@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../CSS/HomePage.css";
-import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getCustomers } from "../Model/loadData.js";
 import { Form } from "react-bootstrap";
@@ -9,7 +8,6 @@ import Navbar from "./Nav";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Pagination from "react-bootstrap/Pagination";
-// import TableWithPagination from '../Model/pagination.js'
 
 function Home() {
   const navigate = useNavigate();

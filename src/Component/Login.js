@@ -130,6 +130,12 @@ async function getTokenLogin(user,setUser) {
     .catch((error) => {
       loginStatus = error["request"]["status"];
       localStorage.setItem("loginStatus", "false");
-      swal(`${error["request"]["status"]} - Unauthorized`, "รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง", "error");
+      let errorMessage = ""
+      if(loginStatus === 401){
+        errorMessage = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"
+      }else{
+        errorMessage = "เกิดข้อผิดพลาด"
+      }
+      swal(`Error ${error["request"]["status"]} - ${error["request"]["statusText"]}`, errorMessage, "error");
     });
 }

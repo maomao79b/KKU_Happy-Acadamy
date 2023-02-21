@@ -296,7 +296,8 @@ async function registerCustomer(fromInput, navigate) {
       navigate("/");
     })
     .catch((error) => {
-      swal(`${error["request"]["status"]}`, "เกิดข้อผิดพลาด", "error");
+      swal(`Error ${error["request"]["status"]} - ${error["request"]["statusText"]}`, "เกิดข้อผิดพลาด", "error");
+
     });
 }
 
