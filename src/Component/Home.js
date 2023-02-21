@@ -16,6 +16,8 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  
+  const [countPage, setCountPage] = useState(1);
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -25,6 +27,7 @@ function Home() {
   const token = localStorage.getItem("accessToken");
   const url = "/customers";
   const handlePageChange = (page) => {
+    setCountPage(page*10)
     setCurrentPage(page);
     setIsLoading(false);
   };
@@ -115,9 +118,9 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                {itemsToDisplay.map((item, i) => (
+                {itemsToDisplay.map((item,i) => (
                   <tr key={i}>
-                    <td>{i + 1}</td>
+                    <td>{i+1}</td>
                     <td>{item.name}</td>
                     <td>{item.surname}</td>
                     <td>{item.username}</td>
