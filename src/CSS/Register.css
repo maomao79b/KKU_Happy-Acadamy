@@ -1,19 +1,32 @@
+/* Use relative units */
+html {
+  font-size: 16px;
+}
+
 .register-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
+  background-image: url('https://images.pexels.com/photos/5110939/pexels-photo-5110939.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  overflow: auto;
 }
 
 .register-card {
-  width: 90%;
-  margin: auto;
+  width: auto;
+  height: auto;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgb(0, 0, 0);
   padding: 10px;
-  background-color: #fffffff5;
+  background-color: #ffffff;
 }
 
 .register-card-title {
@@ -43,8 +56,48 @@
   width: 100%;
 }
 
-@media screen and (min-width: 550px){
-  .register-card{
-    width: 550px;
+/* Add breakpoint for small screens */
+@media screen and (max-width: 480px) {
+  .register-card {
+    padding: 1rem;
+  }
+
+  .register-card-title {
+    font-size: 1.5rem;
+  }
+
+  .register-form-label {
+    font-size: 0.8rem;
+  }
+
+  .register-form-input {
+    font-size: 0.8rem;
+  }
+
+  .register-form-submit {
+    font-size: 0.8rem;
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .register-card {
+    width: 90%;
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .register-card {
+    width: 70%;
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .register-card {
+    width: 500px;
+    margin-bottom: auto;
+  }
+}
+

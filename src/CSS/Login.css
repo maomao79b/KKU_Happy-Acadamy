@@ -1,19 +1,44 @@
+/* Use relative units */
+html {
+  font-size: 16px;
+}
+
 .login-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
+  background-image: url('https://images.pexels.com/photos/1056528/pexels-photo-1056528.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  backdrop-filter: blur(10px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  overflow: auto;
 }
 
 .login-card {
-  width: 90%;
+  width: auto;
+  height: auto;
+  /* margin-top: auto;
+  margin-left: auto;
+  margin-right: auto; */
   margin: auto;
   border-radius: 20px;
-  box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  box-shadow: 0px 0px 10px rgb(138, 137, 137);
+  /* background-b; */
   padding: 10px;
-  background-color: #fffffff5;
+  background-color: #ffffffda;
+}
+
+.btn{
+  transition: 1s;
+}
+.btn:hover{
+  /* border-radius: 30px; */
+  transition: 1s;
+  transform: scale(1.2);
 }
 
 .login-card-title {
@@ -33,6 +58,7 @@
 }
 
 .login-form-input {
+  background-color: rgba(255, 255, 255, 0.418);
   font-size: 16px;
   margin-bottom: 5%;
   width: 100%;
@@ -43,8 +69,48 @@
   width: 100%;
 }
 
-@media screen and (min-width: 370px){
-  .login-card{
-    width: 370px;
+/* Add breakpoint for small screens */
+@media screen and (max-width: 480px) {
+  .login-card {
+    padding: 1rem;
+  }
+
+  .login-card-title {
+    font-size: 1.5rem;
+  }
+
+  .login-form-label {
+    font-size: 0.8rem;
+  }
+
+  .login-form-input {
+    font-size: 0.8rem;
+  }
+
+  .login-form-submit {
+    font-size: 0.8rem;
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .login-card {
+    width: 300px;
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .login-card {
+    width: 300px;
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .login-card {
+    width: 300px;
+    margin-bottom: auto;
+  }
+}
+

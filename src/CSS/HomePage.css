@@ -2,16 +2,17 @@
 body, html {
   height: 100%;
 }
+
 /* Set background image and full height */
-.bg {
+/* .bg {
   background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1623.jpeg");
-  height: 100vh; /* use viewport height instead of 100% to cover full screen */
+  height: 100vh; 
   width: 100%;
   filter: blur(0px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 /* Add background color and set minimum height */
 .bg-color {

@@ -21,8 +21,8 @@ function Login() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('loginStatus') === 'true') {
-      navigate('/home');
+    if (localStorage.getItem("loginStatus") === "true") {
+      navigate("/home");
     }
   }, [navigate]);
 
@@ -35,7 +35,7 @@ function Login() {
       event.stopPropagation();
       setValidated(true);
     } else {
-      await getTokenLogin(user);
+      await getTokenLogin(user,setUser,setValidated);
       if (localStorage.getItem("loginStatus") === "true") {
         navigate("/home");
       }
@@ -55,6 +55,7 @@ function Login() {
               type="text"
               required
               name="username"
+              value={user.username}
               isInvalid={!Boolean(user.username) && validated}
               onChange={({ target }) => {
                 handleUserInput(target.name, target.value);
@@ -72,6 +73,7 @@ function Login() {
               type="password"
               required
               name="password"
+              value={user.password}
               isInvalid={!Boolean(user.password) && validated}
               onChange={({ target }) => {
                 handleUserInput(target.name, target.value);
@@ -84,7 +86,7 @@ function Login() {
 
           <Row style={{ marginTop: "20px", textAlign: "center" }}>
             <Col>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="btn">
                 เข้าสู่ระบบ
               </Button>
             </Col>
@@ -92,7 +94,7 @@ function Login() {
 
           <Row style={{ marginTop: "25px", textAlign: "center" }}>
             <Link to="/register" style={{ textDecoration: "none" }}>
-              ลงทะเบียน
+              สมัครสมาชิก
             </Link>
           </Row>
         </Form>
@@ -100,13 +102,21 @@ function Login() {
     </Card>
   );
 
-  return <div className="login-container">{formForLogin}</div>;
+  // return <div className="login-container">{formForLogin}</div>;
+  return (
+    <div>
+      <div className="bg">
+
+      <div className="login-container">{formForLogin}</div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
 
 let loginStatus = null;
-async function getTokenLogin(user) {
+async function getTokenLogin(user,setUser) {
   await axios
     .post("/login", { username: user.username, password: user.password })
     .then((res) => {
@@ -120,7 +130,6 @@ async function getTokenLogin(user) {
     .catch((error) => {
       loginStatus = error["request"]["status"];
       localStorage.setItem("loginStatus", "false");
-      console.log(loginStatus);
-      swal('เกิดข้อผิดพลาด', "รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง", "error");
+      swal(`${error["request"]["status"]} - Unauthorized`, "รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง", "error");
     });
 }
