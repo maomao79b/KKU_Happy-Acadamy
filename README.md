@@ -7,6 +7,7 @@
   cd my-project
   npm install
 ```
+
 3. to run project use this
 ```bash
   npm start
