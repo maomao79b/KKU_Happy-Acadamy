@@ -20,11 +20,6 @@ function MyNavbar() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="/home">Happy Acadamy</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {/* <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="#features">Features</Nav.Link>
-        </Nav>
-      </Navbar.Collapse> */}
       <Navbar.Collapse className="justify-content-end">
         <Nav className="ml-auto">
           <Nav.Link onClick={logOut}>ออกจากระบบ</Nav.Link>
